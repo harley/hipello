@@ -11,7 +11,7 @@ GIT
 
 GIT
   remote: git://github.com/pewniak747/hipbot.git
-  revision: 46591f452f8686d79b0bd3c67e0f8bc256c89207
+  revision: f7a375281cd984747a7b09fb22932351b4f8744c
   specs:
     hipbot (0.2.0)
       activesupport (~> 3.2.12)
