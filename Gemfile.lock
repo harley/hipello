@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/netguru/hipbot-plugins.git
-  revision: 9a614c0943a90c0f206f4ee987d7e84afb6a4d08
+  revision: f57f9cd5528341d5e7c8425ca18367954acc576c
   specs:
-    hipbot-plugins (0.0.1)
+    hipbot-plugins (0.0.2)
       cleverbot
       hipbot
       htmlentities
@@ -11,7 +11,7 @@ GIT
 
 GIT
   remote: git://github.com/pewniak747/hipbot.git
-  revision: f7a375281cd984747a7b09fb22932351b4f8744c
+  revision: 59ca5feb661721591297619fc0fa8f2e8b89080c
   specs:
     hipbot (0.2.0)
       activesupport (~> 3.2.12)
