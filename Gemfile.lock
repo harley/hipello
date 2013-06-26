@@ -1,0 +1,64 @@
+GIT
+  remote: git://github.com/netguru/hipbot-plugins.git
+  revision: 9a614c0943a90c0f206f4ee987d7e84afb6a4d08
+  specs:
+    hipbot-plugins (0.0.1)
+      cleverbot
+      hipbot
+      htmlentities
+      urban
+      wolfram
+
+GIT
+  remote: git://github.com/pewniak747/hipbot.git
+  revision: e50ec4e88fa43d086d42edeac0e6297ce5da3b32
+  specs:
+    hipbot (0.2.0)
+      activesupport (~> 3.2.12)
+      daemons (~> 1.1.8)
+      em-http-request (~> 1.0.3)
+      eventmachine (~> 1.0.3)
+      i18n (~> 0.6.0)
+      xmpp4r (~> 0.5)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    activesupport (3.2.13)
+      i18n (= 0.6.1)
+      multi_json (~> 1.0)
+    addressable (2.3.4)
+    cleverbot (0.1.1)
+      httparty (~> 0.8.0)
+    cookiejar (0.3.0)
+    daemons (1.1.9)
+    em-http-request (1.0.3)
+      addressable (>= 2.2.3)
+      cookiejar
+      em-socksify
+      eventmachine (>= 1.0.0.beta.4)
+      http_parser.rb (>= 0.5.3)
+    em-socksify (0.3.0)
+      eventmachine (>= 1.0.0.beta.4)
+    eventmachine (1.0.3)
+    htmlentities (4.3.1)
+    http_parser.rb (0.5.3)
+    httparty (0.8.3)
+      multi_json (~> 1.0)
+      multi_xml
+    i18n (0.6.1)
+    multi_json (1.7.7)
+    multi_xml (0.5.4)
+    nokogiri (1.5.10)
+    urban (1.0.0)
+      nokogiri (~> 1.5.0)
+    wolfram (0.2.1)
+      nokogiri (>= 1.4.3)
+    xmpp4r (0.5)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  hipbot!
+  hipbot-plugins!
