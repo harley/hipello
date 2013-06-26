@@ -1,3 +1,5 @@
+require 'hipbot'
+
 class MyHipbot < Hipbot::Bot
   configure do |c|
     c.name      = ENV['HIPBOT_NAME']
