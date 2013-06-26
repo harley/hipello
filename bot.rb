@@ -2,7 +2,6 @@ require 'hipbot'
 
 class MyHipbot < Hipbot::Bot
   configure do |c|
-    c.name      = ENV['HIPBOT_NAME']
     c.jid       = ENV['HIPBOT_JID']
     c.password  = ENV['HIPBOT_PASSWORD']
     # optional configuration
