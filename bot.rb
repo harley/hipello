@@ -1,11 +1,12 @@
 require 'hipbot'
+require 'hipbot-plugins/human'
 
 class MyHipbot < Hipbot::Bot
   configure do |c|
     c.jid       = ENV['HIPBOT_JID']
     c.password  = ENV['HIPBOT_PASSWORD']
     # optional configuration
-    # c.plugins   = [ PluginClass ]
+    c.plugins   = [ Human ]
     # c.teams     = { vip: ['John', 'Mike'] }
     # c.rooms     = { project_rooms: ['Project 1', 'Project 2'] }
   end
