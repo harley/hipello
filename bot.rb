@@ -21,4 +21,6 @@ class MyHipbot < Hipbot::Bot
   end
 end
 
+$stdout.sync = true
+
 MyHipbot.start!
