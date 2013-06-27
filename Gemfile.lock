@@ -1,17 +1,17 @@
 GIT
   remote: git://github.com/netguru/hipbot-plugins.git
-  revision: f57f9cd5528341d5e7c8425ca18367954acc576c
+  revision: 6a061682a8632140831c70045627cc63ede30538
   specs:
-    hipbot-plugins (0.0.2)
+    hipbot-plugins (1.0.0.rc1)
       cleverbot
-      hipbot
+      hipbot (>= 1.0.0.rc1)
       htmlentities
       urban
       wolfram
 
 GIT
   remote: git://github.com/pewniak747/hipbot.git
-  revision: a08c0c87b71665a571f11ac1c9732d7b1e25134e
+  revision: 3b14519e7f9d12790c6cf79f840f04f2cbdf796a
   specs:
     hipbot (1.0.0.rc1)
       activesupport (~> 3.2.12)
@@ -27,7 +27,7 @@ GEM
     activesupport (3.2.13)
       i18n (= 0.6.1)
       multi_json (~> 1.0)
-    addressable (2.3.4)
+    addressable (2.3.5)
     cleverbot (0.1.1)
       httparty (~> 0.8.0)
     cookiejar (0.3.0)
