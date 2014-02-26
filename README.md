@@ -7,7 +7,7 @@ Deploy your own hipbot to heroku in 4 easy steps:
 1) Clone this repo
 
 ```
-git clone git@github.com:netguru/hipbot-example.git
+git clone https://github.com/netguru/hipbot-example.git
 ```
 
 2) Set up heroku app
