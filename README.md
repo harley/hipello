@@ -1,5 +1,7 @@
 # hipbot-example
 
+[![Code Climate](https://codeclimate.com/github/netguru/hipbot-example.png)](https://codeclimate.com/github/netguru/hipbot-example)
+
 Deploy your own hipbot to heroku in 4 easy steps:
 
 0) Create an user on hipchat for your hipbot
