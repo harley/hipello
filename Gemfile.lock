@@ -1,60 +1,71 @@
 GIT
   remote: git://github.com/netguru/hipbot-plugins.git
-  revision: 6a061682a8632140831c70045627cc63ede30538
+  revision: eb03f30b58b225553f72802907af943d77b6ee38
+  branch: master
   specs:
-    hipbot-plugins (1.0.0.rc1)
+    hipbot-plugins (1.0.0)
       cleverbot
-      hipbot (>= 1.0.0.rc1)
+      hipbot (~> 1.0.0)
       htmlentities
-      urban
       wolfram
 
 GIT
   remote: git://github.com/pewniak747/hipbot.git
-  revision: 3b14519e7f9d12790c6cf79f840f04f2cbdf796a
+  revision: 8fe796efccef4f3cd8e2b72fc262da1793312877
+  branch: master
   specs:
-    hipbot (1.0.0.rc1)
-      activesupport (~> 3.2.12)
-      daemons (~> 1.1.8)
-      em-http-request (~> 1.0.3)
-      eventmachine (~> 1.0.3)
-      i18n (~> 0.6.0)
-      xmpp4r (~> 0.5)
+    hipbot (1.0.3)
+      activesupport (>= 3.0.0)
+      daemons (~> 1.1)
+      em-http-request (~> 1.1)
+      eventmachine (~> 1.0)
+      xmpp4r-hipchat (= 0.0.4)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (3.2.13)
-      i18n (= 0.6.1)
-      multi_json (~> 1.0)
+    activesupport (4.0.3)
+      i18n (~> 0.6, >= 0.6.4)
+      minitest (~> 4.2)
+      multi_json (~> 1.3)
+      thread_safe (~> 0.1)
+      tzinfo (~> 0.3.37)
     addressable (2.3.5)
-    cleverbot (0.1.1)
-      httparty (~> 0.8.0)
-    cookiejar (0.3.0)
+    atomic (1.1.15)
+    cleverbot (0.2.0)
+      httparty (>= 0.8.1, < 1.0)
+    cookiejar (0.3.1)
     daemons (1.1.9)
-    em-http-request (1.0.3)
-      addressable (>= 2.2.3)
+    em-http-request (1.1.2)
+      addressable (>= 2.3.4)
       cookiejar
-      em-socksify
-      eventmachine (>= 1.0.0.beta.4)
-      http_parser.rb (>= 0.5.3)
+      em-socksify (>= 0.3)
+      eventmachine (>= 1.0.3)
+      http_parser.rb (>= 0.6.0)
     em-socksify (0.3.0)
       eventmachine (>= 1.0.0.beta.4)
     eventmachine (1.0.3)
     htmlentities (4.3.1)
-    http_parser.rb (0.5.3)
-    httparty (0.8.3)
-      multi_json (~> 1.0)
-      multi_xml
-    i18n (0.6.1)
-    multi_json (1.7.7)
-    multi_xml (0.5.4)
-    nokogiri (1.5.10)
-    urban (1.0.0)
-      nokogiri (~> 1.5.0)
+    http_parser.rb (0.6.0)
+    httparty (0.13.0)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
+    i18n (0.6.9)
+    json (1.8.1)
+    mini_portile (0.5.2)
+    minitest (4.7.5)
+    multi_json (1.8.4)
+    multi_xml (0.5.5)
+    nokogiri (1.6.1)
+      mini_portile (~> 0.5.0)
+    thread_safe (0.2.0)
+      atomic (>= 1.1.7, < 2)
+    tzinfo (0.3.38)
     wolfram (0.2.1)
       nokogiri (>= 1.4.3)
-    xmpp4r (0.5)
+    xmpp4r (0.5.6)
+    xmpp4r-hipchat (0.0.4)
+      xmpp4r (~> 0.5)
 
 PLATFORMS
   ruby
