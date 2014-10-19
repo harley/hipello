@@ -29,6 +29,15 @@ git push heroku master
 heroku ps:scale worker=1
 ```
 
+## Usage
+
+```ruby
+hello hipbot @your_bot_name # => Hello human
+my name is matz @your_bot_name # => Nice to meet you.
+```
+
+Don't forget to mention your bot username.
+
 You can now customize the responses in bot.rb for fun and profit!
 
 Also, check out some of the plugins included ( https://github.com/netguru/hipbot-plugins#hipbot-plugins ).
