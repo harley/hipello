@@ -8,6 +8,7 @@ class MyHipbot < Hipbot::Bot
   configure do |c|
     c.jid       = ENV['HIPBOT_JID']
     c.password  = ENV['HIPBOT_PASSWORD']
+    fail "Define HIPBOT_JID and HIPBOT_PASSWORD env variables!" unless c.jid && c.password
   end
 
   desc 'this is a simple response'
