@@ -1,5 +1,10 @@
-source 'https://rubygems.org'
-ruby '2.1.1'
+source 'http://rubygems.org'
+ruby '2.1.3'
 
 gem 'hipbot'
 gem 'hipbot-plugins', '1.0.2'
+gem 'dotenv'
+gem 'pry'
+gem 'ruby-trello'
+gem 'minitest'
+gem 'filewatcher'
