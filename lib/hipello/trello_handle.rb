@@ -7,12 +7,17 @@ module Hipello
 
     def initialize
       connect_to_trello
-      @board = Trello::Board.find ENV['TRELLO_BOARD_ID']
-      @lists = @board.lists
+      find_board
       @lookup = {}
       @lists.each do |l|
         @lookup[l.name] = l
       end
+    end
+
+    def find_board
+      @board = Trello::Board.find ENV['TRELLO_BOARD_ID']
+      @lists = @board.lists
+      @board
     end
 
     def add_card(name)
