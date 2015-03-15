@@ -20,7 +20,7 @@ module Hipello
       end
 
       if m = text.match(HASHTAG)
-        @output[:hashtag]  = m[1]
+        @output[:hashtag] = m[1]
       end
 
       message = text.gsub(MENTION, '').gsub(HASHTAG, '').squeeze.strip
