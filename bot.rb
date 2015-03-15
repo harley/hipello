@@ -1,27 +1,14 @@
-require 'hipbot'
-require 'hipbot-plugins/human'
+require_relative 'lib/hipello'
+require 'dotenv'
+Dotenv.load
+
 # require 'hipbot-plugins/github'
 # require 'hipbot-plugins/google'
 # check out more plugins on https://github.com/netguru/hipbot-plugins
 
-class MyHipbot < Hipbot::Bot
-  configure do |c|
-    c.jid       = ENV['HIPBOT_JID']
-    c.password  = ENV['HIPBOT_PASSWORD']
-    fail "Define HIPBOT_JID and HIPBOT_PASSWORD env variables!" unless c.jid && c.password
-  end
+# test trello
+# @trello = Hipello::TrelloHandler.new.add_card("make sure this shows up: #{Time.now}")
 
-  desc 'this is a simple response'
-  on(/hello hipbot/) do
-    reply('hello human')
-  end
-
-  desc 'this is a response with arguments'
-  on(/my name is (\w+) (\w+)/) do |first_name, last_name|
-    reply("nice to meet you, #{first_name} #{last_name}!")
-  end
-end
-
+# test hipchat
 $stdout.sync = true
-
-MyHipbot.start!
+Hipello::HipchatHandler.new.test_start!
