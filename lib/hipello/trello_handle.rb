@@ -2,30 +2,30 @@ require_relative 'connectors'
 
 module Hipello
   class TrelloHandle
-    attr_reader :board, :lists, :lookup
+    attr_reader :boards, :list_ids
     include Connectors
 
     def initialize
       connect_to_trello
-      find_board
-      @lookup = {}
-      @lists.each do |l|
-        @lookup[l.name] = l
+      load_boards
+    end
+
+    def load_boards
+      @boards = {}
+      @list_ids = {}
+      ENV.each do |key, value| 
+        if m = key.to_s.upcase.match(/BOARD_FOR_ID_(.*)/)
+          board = Trello::Board.find value
+          list_id = board.lists.first.id
+          @boards[m[1].downcase] = board
+          @list_ids[m[1].downcase] = list_id
+        end
       end
+      @boards
     end
 
-    def find_board
-      @board = Trello::Board.find ENV['TRELLO_BOARD_ID']
-      @lists = @board.lists
-      @board
-    end
-
-    def add_card(name)
-      ListCard.mine.create_card(name)
-    end
-
-    def add_card_to(list_name, card_name)
-      if l = lookup[list_name]
+    def add_card_to(board_tag, card_name)
+      if l = @list_ids[board_tag]
         Trello::Card.create list_id: l.id, name: card_name
       else
         raise "List doesn't exist"
