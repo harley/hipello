@@ -2,12 +2,13 @@ require_relative 'connectors'
 
 module Hipello
   class TrelloHandle
-    attr_reader :boards, :list_ids
+    attr_reader :boards, :list_ids, :last_added_card, :last_added_board, :errors
     include Connectors
 
     def initialize
       connect_to_trello
       load_boards
+      @errors = []
     end
 
     def load_boards
@@ -27,11 +28,24 @@ module Hipello
     end
 
     def create_card_in(board_tag, card_options)
+      @last_added_board = boards[board_tag]
       if l = list_ids[board_tag]
-        card = Trello::Card.create card_options.merge(list_id: l)
+        @last_added_card = Trello::Card.create card_options.merge(list_id: l)
       else
-        raise "List doesn't exist"
+        @errors.push("Require at least one list in board ##{board_tag} [#{@last_added_card.name}]")
       end
+    end
+
+    def show_boards
+      boards.map{|board_tag, board| "##{board_tag} => [#{board.name}]"}.join(', ')
+    end
+
+    def display_errors
+      @errors.to_sentence
+    end
+
+    def valid?
+      @errors.empty?
     end
   end
 end

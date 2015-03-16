@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe 'Trello::TrelloHandle' do
-  let(:board1) { instance_double('Board 1', lists: [list1]) }
-  let(:board2) { instance_double('Board 2', lists: [list2]) }
+  let(:board1) { instance_double('Board 1', lists: [list1], name: 'board 1') }
+  let(:board2) { instance_double('Board 2', lists: [list2], name: 'board 2') }
   let(:list1)  { instance_double('List1', name: 'list-1', id: '111') }
   let(:list2)  { instance_double('List2', name: 'list-2', id: '222') }
   let(:handle) { Hipello::TrelloHandle.new }
@@ -35,6 +35,12 @@ describe 'Trello::TrelloHandle' do
       card = instance_double('Card')
       allow(Trello::Card).to receive(:create) { card }
       expect(handle.create_card_in('request', name: 'card1')).to eq card
+    end
+  end
+
+  describe "#show_boards" do
+    it "should display correctly" do
+      expect(handle.show_boards).to eq "#request => [board 1], #bug => [board 2]"
     end
   end
 end

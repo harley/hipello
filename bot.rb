@@ -9,10 +9,12 @@ Dotenv.load # make sure you have a .env file. see .env.sample
 # test trello
 # @trello = Hipello::TrelloHandle.new.add_card("make sure this shows up: #{Time.now}")
 
+if ENV['START']
 # test hipchat
-# $stdout.sync = true
-# hip = Hipello::HipchatHandle.new
-# hip.test_start!
-
+  $stdout.sync = true
+  hip = Hipello::HipchatHandle.new
+  hip.test_start!
+end
+#
 # a = Hipello::TrelloHandle.new
 # a.add_card_to('first-list', 'first-card')

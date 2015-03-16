@@ -12,6 +12,7 @@ module Hipello
         title: '',
         description: ''
       }
+      parse
     end
 
     def parse
@@ -25,6 +26,8 @@ module Hipello
 
       message = text.gsub(MENTION, '').gsub(HASHTAG, '').squeeze.strip
       @output[:title] = message
+      @output
+      self
     end
 
     def mentions

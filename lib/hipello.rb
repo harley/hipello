@@ -13,27 +13,27 @@ module Hipello
       reply('hello human')
     end
 
-    on(/trello (.+)/) do |name|
-      @list_card = ListCard.mine
-      @list_card.create_card(name)
-    end
-  end
-
-  class ListCard
-    attr_reader :list_id
-
-    def initialize(list_id)
-      @list_id = list_id
-    end
-
-    def create_card(name)
-      if name.present?
-        Trello::Card.create list_id: @list_id, name: name
+    on(/(.+)/, global: true) do |text|
+      if text.match(/#\w+/)
+        @trello = MyHipbot.ask_trello(text)
+        if @trello.valid?
+          reply("added card '#{@trello.last_added_card.name}' to board '#{@trello.last_added_board.name}'")
+        else
+          reply(@trello.display_errors)
+        end
       end
     end
 
-    def self.mine
-      new(ENV['TRELLO_LIST_ID'])
+    def self.ask_trello(text)
+      output = MessageParser.new(text).output
+      board_tag = output[:hashtag]
+      raise "board tag is missing" unless board_tag.present?
+      title = output[:title]
+      raise "title is missing" unless title.present?
+
+      @handle ||= TrelloHandle.new
+      @handle.create_card_in(board_tag, name: title)
+      @handle
     end
   end
 end
