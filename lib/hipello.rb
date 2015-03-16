@@ -31,9 +31,7 @@ module Hipello
       title = output[:title]
       raise "title is missing" unless title.present?
 
-      @handle ||= TrelloHandle.new
-      @handle.create_card_in(board_tag, name: title)
-      @handle
+      TrelloHandle.add_card(board_tag, name: title)
     end
   end
 end

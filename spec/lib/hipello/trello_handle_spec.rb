@@ -5,9 +5,12 @@ describe 'Trello::TrelloHandle' do
   let(:board2) { instance_double('Board 2', lists: [list2], name: 'board 2') }
   let(:list1)  { instance_double('List1', name: 'list-1', id: '111') }
   let(:list2)  { instance_double('List2', name: 'list-2', id: '222') }
-  let(:handle) { Hipello::TrelloHandle.new }
+  let(:handle) { Class.new(Hipello::TrelloHandle).instance } # want to reset the instance at each test
 
   before do
+    ENV['BOARD_ID_FOR_REQUEST'] = 'abc123'
+    ENV['BOARD_ID_FOR_BUG'] = 'xyz123'
+
     allow(Trello::Board).to receive(:find) do |val|
       case val
       when 'abc123'
@@ -18,9 +21,6 @@ describe 'Trello::TrelloHandle' do
     end
     # allow(Trello::Board).to receive(:find).with('abcxyz') { board2 }
     allow_any_instance_of(Hipello::TrelloHandle).to receive(:connect_to_trello)
-
-    ENV['BOARD_ID_FOR_REQUEST'] = 'abc123'
-    ENV['BOARD_ID_FOR_BUG'] = 'xyz123'
   end
 
   describe "#board" do
@@ -34,7 +34,7 @@ describe 'Trello::TrelloHandle' do
     it "should add to the right board" do
       card = instance_double('Card')
       allow(Trello::Card).to receive(:create) { card }
-      expect(handle.create_card_in('request', name: 'card1')).to eq card
+      expect{handle.create_card_in('request', name: 'card1')}.to change {handle.last_added_card}.to(card)
     end
   end
 

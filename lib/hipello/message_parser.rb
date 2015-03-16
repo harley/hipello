@@ -15,6 +15,20 @@ module Hipello
       parse
     end
 
+    def mentions
+      @output[:mentions]
+    end
+
+    def hashtag
+      @output[:hashtag]
+    end
+
+    def title
+      @output[:title]
+    end
+
+    private
+
     def parse
       if m = text.match(MENTION)
         @output[:mentions].push m[0]
@@ -28,18 +42,6 @@ module Hipello
       @output[:title] = message
       @output
       self
-    end
-
-    def mentions
-      @output[:mentions]
-    end
-
-    def hashtag
-      @output[:hashtag]
-    end
-
-    def title
-      @output[:title]
     end
   end
 end
