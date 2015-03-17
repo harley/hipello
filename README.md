@@ -53,3 +53,8 @@ We store config in ENV vars (per http://12factor.net/config). The `.env.sample` 
   ```
 - Set ENV variables via `heroku config:set --app <your_app_name> TRELLO_KEY=... HIPBOT_JID=... <and-other-keys>`
 (You can also edit config vars on your app's settings tab on the Heroku Dashboard) ![heroku dashboard](https://s3.amazonaws.com/heroku.devcenter/heroku_assets/images/389-original.jpg)
+
+## TODO
+- [ ] Assign users to card
+- [ ] Support labeling for cards
+- [ ] Show message 'multiple hashtags detected; using only the last one'

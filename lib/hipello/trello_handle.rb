@@ -44,10 +44,10 @@ module Hipello
           @current_card = Trello::Card.create card_options.merge(list_id: @current_list.id)
           # TODO: catch API call crashing
         else
-          @errors.push("I need card title text to add to board ##{board_tag} [#{@current_card.name}]")
+          @errors.push("I need card title text to add to board ##{board_tag} [#{@current_board.name}]")
         end
       else
-        @errors.push("I need at least one list in board ##{board_tag} [#{@current_card.name}]")
+        @errors.push("I need at least one list in board ##{board_tag} [#{@current_board.name}]")
       end
       self
     end
