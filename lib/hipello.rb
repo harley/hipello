@@ -1,6 +1,5 @@
 require 'trello'
 require 'hipbot'
-require 'hipbot-plugins/human'
 require_relative 'hipello/trello_handle'
 require_relative 'hipello/hipchat_handle'
 require_relative 'hipello/message_parser'

@@ -7,7 +7,7 @@ module Hipello
       connect_to_hipchat
     end
 
-    def test_start!
+    def start_bot!
       MyHipbot.start!
     end
   end
