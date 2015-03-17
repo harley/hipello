@@ -4,11 +4,11 @@ module Hipello
     HASHTAG = /#([^ ]+)/
     attr_reader :text, :output
 
-    def initialize(text)
+    def initialize(text, hashtag = nil)
       @text = text
       @output = {
         mentions: [],
-        hashtag: '', # only allow one hash tag
+        hashtag: hashtag, # only allow one hash tag
         title: '',
         description: ''
       }
@@ -30,15 +30,20 @@ module Hipello
     private
 
     def parse
-      if m = text.match(MENTION)
-        @output[:mentions].push m[0]
+      message = text.dup
+
+      while m = message.match(MENTION) do
+        @output[:mentions].push m[1]
+        message.sub!(MENTION, '')
       end
 
-      if m = text.match(HASHTAG)
+      if @output[:hashtag].nil? && (m = message.match(HASHTAG))
         @output[:hashtag] = m[1]
+        message.gsub!(HASHTAG, '')
       end
 
-      message = text.gsub(MENTION, '').gsub(HASHTAG, '').squeeze.strip
+      message = message.strip.squeeze # remove double spaces caused by deleting words
+
       @output[:title] = message
       @output
       self

@@ -37,7 +37,7 @@ describe 'Trello::TrelloHandle' do
     it "should add to the right board" do
       card = instance_double('Card')
       allow(Trello::Card).to receive(:create) { card }
-      expect{handle.create_card_in('request', name: 'card1')}.to change {handle.last_added_card}.to(card)
+      expect{handle.create_card_in('request', name: 'card1')}.to change {handle.current_card}.to(card)
     end
   end
 

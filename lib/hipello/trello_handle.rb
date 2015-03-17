@@ -2,8 +2,8 @@ require_relative 'connectors'
 
 module Hipello
   class TrelloHandle
-    attr_reader :boards, :board_lists, :board_inbox
-    attr_reader :last_added_card, :last_added_board, :errors, :last_message
+    attr_reader :boards, :board_lists, :board_inbox, :errors
+    attr_reader :current_card, :current_board, :current_list, :last_message
     include Connectors
     include Singleton
 
@@ -38,16 +38,16 @@ module Hipello
 
     def create_card_in(board_tag, card_options)
       @errors = []
-      @last_added_board = boards[board_tag]
-      if l = board_inbox[board_tag]
+      @current_board = boards[board_tag]
+      if @current_list = board_inbox[board_tag]
         if card_options[:name].present?
-          @last_added_card = Trello::Card.create card_options.merge(list_id: l.id)
+          @current_card = Trello::Card.create card_options.merge(list_id: @current_list.id)
           # TODO: catch API call crashing
         else
-          @errors.push("I need some text to add a card to board ##{board_tag} [#{@last_added_card.name}]")
+          @errors.push("I need card title text to add to board ##{board_tag} [#{@current_card.name}]")
         end
       else
-        @errors.push("I need at least one list in board ##{board_tag} [#{@last_added_card.name}]")
+        @errors.push("I need at least one list in board ##{board_tag} [#{@current_card.name}]")
       end
       self
     end
