@@ -47,5 +47,9 @@ We store config in ENV vars (per http://12factor.net/config). The `.env.sample` 
   ```
 
 - Create a heroku app and push the code to it
+  ```
+  heroku create
+  git push heroku master
+  ```
 - Set ENV variables via `heroku config:set --app <your_app_name> TRELLO_KEY=... HIPBOT_JID=... <and-other-keys>`
 (You can also edit config vars on your app's settings tab on the Heroku Dashboard) ![heroku dashboard](https://s3.amazonaws.com/heroku.devcenter/heroku_assets/images/389-original.jpg)

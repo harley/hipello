@@ -9,7 +9,7 @@ Dotenv.load # make sure you have a .env file. see .env.sample
 # test trello
 # @trello = Hipello::TrelloHandle.new.add_card("make sure this shows up: #{Time.now}")
 
-if ENV['START']
+if ENV['DEBUG']
 # test hipchat
   $stdout.sync = true
   hip = Hipello::HipchatHandle.new
