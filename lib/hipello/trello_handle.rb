@@ -32,10 +32,14 @@ module Hipello
       @errors = []
       @last_added_board = boards[board_tag]
       if l = list_ids[board_tag]
-        @last_added_card = Trello::Card.create card_options.merge(list_id: l)
-        # TODO: catch API call crashing 
+        if card_options[:name].present?
+          @last_added_card = Trello::Card.create card_options.merge(list_id: l)
+          # TODO: catch API call crashing
+        else
+          @errors.push("I need some text to add a card to board ##{board_tag} [#{@last_added_card.name}]")
+        end
       else
-        @errors.push("Require at least one list in board ##{board_tag} [#{@last_added_card.name}]")
+        @errors.push("I need at least one list in board ##{board_tag} [#{@last_added_card.name}]")
       end
       self
     end

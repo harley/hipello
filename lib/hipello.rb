@@ -15,11 +15,16 @@ module Hipello
 
     on(/(.+)/, global: true) do |text|
       if text.match(/#\w+/)
-        @trello = MyHipbot.ask_trello(text)
-        if @trello.valid?
-          reply("added card '#{@trello.last_added_card.name}' to board '#{@trello.last_added_board.name}'")
-        else
-          reply(@trello.display_errors)
+        begin
+          @trello = MyHipbot.ask_trello(text)
+          if @trello.valid?
+            reply("added card '#{@trello.last_added_card.name}' to board '#{@trello.last_added_board.name}'")
+          else
+            reply(@trello.display_errors)
+          end
+        rescue Exception => e
+          reply(e)
+          raise(e)
         end
       end
     end
