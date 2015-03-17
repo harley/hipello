@@ -42,7 +42,7 @@ module Hipello
         message.gsub!(HASHTAG, '')
       end
 
-      message = message.strip.squeeze # remove double spaces caused by deleting words
+      message = message.strip.squeeze(' ') # remove double spaces caused by deleting words
 
       @output[:title] = message
       @output
