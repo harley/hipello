@@ -1,11 +1,13 @@
 require 'spec_helper'
 
 describe 'Trello::TrelloHandle' do
-  let(:board1) { instance_double('Board 1', lists: [list1], name: 'board 1') }
-  let(:board2) { instance_double('Board 2', lists: [list2], name: 'board 2') }
-  let(:list1)  { instance_double('List1', name: 'list-1', id: '111') }
-  let(:list2)  { instance_double('List2', name: 'list-2', id: '222') }
-  let(:handle) { Class.new(Hipello::TrelloHandle).instance } # want to reset the instance at each test
+  let(:board1) { instance_double('Board', lists: [list1], name: 'board 1') }
+  let(:board2) { instance_double('Board', lists: [list2, inbox], name: 'board 2') }
+  let(:list1)  { instance_double('List', name: 'list-1', id: '111') }
+  let(:list2)  { instance_double('List', name: 'list-2', id: '222') }
+  let(:inbox) { instance_double('List', name: 'Inbox', id: '333')  }
+
+  let(:handle) { Class.new(Hipello::TrelloHandle).instance } # reset the instance at each test
 
   before do
     ENV['BOARD_ID_FOR_REQUEST'] = 'abc123'
@@ -23,10 +25,11 @@ describe 'Trello::TrelloHandle' do
     allow_any_instance_of(Hipello::TrelloHandle).to receive(:connect_to_trello)
   end
 
-  describe "#board" do
+  describe "#new" do
     it "should reload the right boards" do
       expect(handle.boards).to eq({'request' => board1, 'bug' => board2})
-      expect(handle.list_ids).to eq({'request' => '111', 'bug' => '222'})
+      expect(handle.board_lists).to eq({'request' => [list1], 'bug' => [list2, inbox]})
+      expect(handle.board_inbox).to eq({'request' => list1, 'bug' => inbox})
     end
   end
 
