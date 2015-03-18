@@ -10,26 +10,24 @@ module Hipello
     on(/(.*)#(\w+)(.*)/, global: true) do |beforetag, hashtag, aftertag|
       text = beforetag + aftertag
       begin
-        @trello = MyHipbot.ask_trello(text, hashtag)
+        @trello = MyHipbot.ask_trello(sender, text, hashtag)
         if @trello.valid?
           reply("added card '#{@trello.current_card.name}' to list '#{@trello.current_list.name}' in board '#{@trello.current_board.name}'")
         else
           reply(@trello.display_errors)
         end
       rescue Exception => e
-        reply(e)
+        reply("ERROR: #{e}")
         raise(e)
       end
     end
 
-    def self.ask_trello(text, hashtag = nil)
+    def self.ask_trello(sender, text, hashtag = nil)
       output = MessageParser.new(text, hashtag).output
-      board_tag = output[:hashtag]
-      raise "trying to connect to Trello but board hashtag is missing" unless board_tag.present?
-      title = output[:title]
-      raise "creating a Trello card? I need some text for the name" unless title.present?
+      raise "trying to connect to Trello but board hashtag is missing" unless output[:hashtag].present?
+      raise "creating a Trello card? I need some text for the name" unless output[:title].present?
 
-      TrelloHandle.add_card(board_tag, name: title)
+      TrelloHandle.add_card(output.merge(sender: sender))
     end
   end
 end

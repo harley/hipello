@@ -2,7 +2,7 @@ require_relative 'connectors'
 
 module Hipello
   class TrelloHandle
-    attr_reader :boards, :board_lists, :board_inbox, :errors
+    attr_reader :boards, :board_lists, :board_inbox, :errors, :board_members
     attr_reader :current_card, :current_board, :current_list, :last_message
     include Connectors
     include Singleton
@@ -17,6 +17,7 @@ module Hipello
       @boards = {}
       @board_lists = {}
       @board_inbox = {}
+      @board_members = {}
       ENV.each do |key, value| 
         if m = key.to_s.upcase.match(/BOARD_ID_FOR_(.*)/)
           tag = m[1].downcase
@@ -27,6 +28,9 @@ module Hipello
           # TODO move this
           @board_lists[tag] = board.lists
           @board_inbox[tag] = find_inbox_in(board.lists)
+          board.members.each do |member|
+            @board_members[member.username] = member
+          end
         end
       end
       @boards
@@ -36,7 +40,15 @@ module Hipello
       lists.find {|e| e.name.match(/inbox/i)} || lists[0]
     end
 
-    def create_card_in(board_tag, card_options)
+    def create_card_in(mentions: [], board_tag:, sender:, title:, description: '')
+      description << "\n-- asked by #{sender}"
+      puts "\n\n\nMENTIONS: #{mentions.inspect}"
+      members = mentions.map{|u| board_members[u]}.compact.uniq
+      puts "\n\n\nMEMBERS: #{members.inspect}"
+
+      card_options = {name: title, desc: description}
+      card_options.merge! member_ids: members.map(&:id)
+
       @errors = []
       @current_board = boards[board_tag]
       if @current_list = board_inbox[board_tag]
@@ -68,8 +80,8 @@ module Hipello
       @errors = []
     end
 
-    def self.add_card(board_tag, card_options)
-      instance.create_card_in(board_tag, card_options)
+    def self.add_card(options)
+      instance.create_card_in(options)
     end
   end
 end

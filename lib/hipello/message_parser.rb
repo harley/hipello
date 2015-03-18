@@ -1,6 +1,6 @@
 module Hipello
   class MessageParser
-    MENTION = /(@\w+)/
+    MENTION = /@(\w+)/
     HASHTAG = /#([^ ]+)/
     attr_reader :text, :output
 
