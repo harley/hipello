@@ -24,9 +24,6 @@ module Hipello
 
     def self.ask_trello(sender, text, hashtag = nil)
       output = MessageParser.new(text, hashtag).output
-      raise "trying to connect to Trello but board hashtag is missing" unless output[:hashtag].present?
-      raise "creating a Trello card? I need some text for the name" unless output[:title].present?
-
       TrelloHandle.add_card(output.merge(sender: sender))
     end
   end

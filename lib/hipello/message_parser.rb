@@ -9,7 +9,7 @@ module Hipello
       @output = {
         mentions: [],
         hashtag: hashtag, # only allow one hash tag
-        title: '',
+        title: nil,
         description: ''
       }
       parse

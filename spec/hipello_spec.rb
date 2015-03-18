@@ -10,10 +10,8 @@ describe Hipello::MyHipbot do
   let(:sender) { instance_double('Hipchat User')}
 
   describe "#ask_trello" do
-    it "should raise error for missing title" do
-      allow(Hipello::TrelloHandle).to receive(:add_card)
-      expect{Hipello::MyHipbot.ask_trello(sender, 'abc')}.to raise_error(/hashtag is missing/)
-      expect{Hipello::MyHipbot.ask_trello(sender, '', '#tag')}.to raise_error(/I need some text/)
+    it "call add_card for valid inputs" do
+      expect(Hipello::TrelloHandle).to receive(:add_card)
       expect{Hipello::MyHipbot.ask_trello(sender, 'abc', '#tag')}.to_not raise_error
     end
   end
