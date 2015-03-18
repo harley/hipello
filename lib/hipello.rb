@@ -12,7 +12,7 @@ module Hipello
       begin
         @trello = MyHipbot.ask_trello(sender, text, hashtag)
         if @trello.valid?
-          reply("added card '#{@trello.current_card.name}' to list '#{@trello.current_list.name}' in board '#{@trello.current_board.name}'")
+          reply("added card '#{@trello.current_card.name[0..5]}…' to list '#{@trello.current_list.name}' in board '#{@trello.current_board.name}'")
         else
           reply(@trello.display_errors)
         end
