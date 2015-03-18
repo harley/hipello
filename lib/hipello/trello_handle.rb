@@ -40,7 +40,7 @@ module Hipello
       lists.find {|e| e.name.match(/inbox/i)} || lists[0]
     end
 
-    def create_card_in(mentions: [], board_tag:, sender:, title:, description: '')
+    def create_card_in(mentions: [], hashtag:, sender:, title:, description: '')
       description << "\n-- asked by #{sender}"
       puts "\n\n\nMENTIONS: #{mentions.inspect}"
       members = mentions.map{|u| board_members[u]}.compact.uniq
@@ -50,22 +50,22 @@ module Hipello
       card_options.merge! member_ids: members.map(&:id)
 
       @errors = []
-      @current_board = boards[board_tag]
-      if @current_list = board_inbox[board_tag]
+      @current_board = boards[hashtag]
+      if @current_list = board_inbox[hashtag]
         if card_options[:name].present?
           @current_card = Trello::Card.create card_options.merge(list_id: @current_list.id)
           # TODO: catch API call crashing
         else
-          @errors.push("I need card title text to add to board ##{board_tag} [#{@current_board.name}]")
+          @errors.push("I need card title text to add to board ##{hashtag} [#{@current_board.name}]")
         end
       else
-        @errors.push("I need at least one list in board ##{board_tag} [#{@current_board.name}]")
+        @errors.push("I need at least one list in board ##{hashtag} [#{@current_board.name}]")
       end
       self
     end
 
     def show_boards
-      boards.map{|board_tag, board| "##{board_tag} => [#{board.name}]"}.join(', ')
+      boards.map{|hashtag, board| "##{hashtag} => [#{board.name}]"}.join(', ')
     end
 
     def display_errors

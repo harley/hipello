@@ -39,7 +39,7 @@ describe Hipello::TrelloHandle do
     it "should add to the right board" do
       card = instance_double('Card')
       allow(Trello::Card).to receive(:create) { card }
-      expect{handle.create_card_in(board_tag: 'request', sender: sender, title: 'card1')}.to change {handle.current_card}.to(card)
+      expect{handle.create_card_in(hashtag: 'request', sender: sender, title: 'card1')}.to change {handle.current_card}.to(card)
     end
   end
 
