@@ -85,6 +85,7 @@ module Hipello
         if @current_list = board_inbox[hashtag]
           if card_options[:name].present?
             @current_card = Trello::Card.create card_options.merge(list_id: @current_list.id)
+            # puts "\n\n\n[INSPECT]#{@current_card.inspect}"
           else
             @errors.push("I need text to add a card to board ##{hashtag} [#{@current_board.name}]")
           end
