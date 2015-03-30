@@ -77,8 +77,13 @@ module Hipello
       ENV['HIPCHAT_ROOM_BASE_URL'] + room.attributes['hipchat_id']
     end
 
+    def message_url(room)
+      t = Time.now.strftime("%Y/%m/%d")
+      room_url(room) + '/' + t
+    end
+
     def create_card_in(mentions: [], hashtag:, sender:, room:, title:, description: '')
-      description << "\n-- added by #{sender} from #{room_url room}"
+      description << "\n-- added by #{sender} from #{message_url(room)}"
       members = mentions.uniq.map{|u| locate_member(u)}.compact
       # puts "\n\n\n[INSPECT] MENTIONS: #{mentions.inspect}"
       # puts "\n\n\n[INSPECT] LOCATED MEMBERS: #{members.inspect}"
