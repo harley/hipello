@@ -78,7 +78,7 @@ module Hipello
     end
 
     def message_url(room)
-      t = Time.now.strftime("%Y/%m/%d")
+      t = Time.now.in_time_zone('US/Pacific').strftime("%Y/%m/%d")
       room_url(room) + '/' + t
     end
 
